@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { TemperatureMeasurement } from '../home/home.interface';
+import { HttpClient, HttpResponse} from '@angular/common/http';
+import { TemperatureMeasurement } from '../models/measurements.interface';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class MeasurementsService {
     private http: HttpClient
   ) { }
 
-  public findAll() {
-    return this.http.get<TemperatureMeasurement[]>(this.apiUrl);
+  public findAll(pageNumber: number, pageSize: number) {
+    return this.http.get<TemperatureMeasurement[]>(`${this.apiUrl}?pageNumber=${pageNumber}&pageSize=${pageSize}`);
  }
 }

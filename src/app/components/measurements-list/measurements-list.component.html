@@ -1,0 +1,34 @@
+<div class="ion-padding">
+  <ion-button (click)="list()">
+    <ion-icon slot="start" name="search"></ion-icon>
+    List
+  </ion-button>
+  <ion-grid>
+    <ion-row>
+      <ion-col>Sensor ID</ion-col>
+      <ion-col>Temperature</ion-col>
+      <ion-col>Latitude</ion-col>
+      <ion-col>Longitude</ion-col>
+      <ion-col>Measurement Date Time</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let m of measurements" class="row">
+      <ion-col>{{m.sensorId}}</ion-col>
+      <ion-col>{{m.temperature}}</ion-col>
+      <ion-col>{{m.latitude}}</ion-col>
+      <ion-col>{{m.longitude}}</ion-col>
+      <ion-col>{{m.measurementDateTime}}</ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+  <div class="loadMore">
+      <ion-button size="small" (click)="loadMore()"
+        *ngIf="measurements.length > 0"
+        [disabled]="noMoreData">
+        <ion-icon slot="start" name="more"></ion-icon>
+        Load more...
+      </ion-button>
+  </div>
+
+
+</div>
