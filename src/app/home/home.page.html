@@ -1,14 +1,31 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Ionic Blank
+      Temperature Sensor APP
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  {{return}}
   <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
+    <ion-grid>
+      <ion-row>
+        <ion-col>Sensor ID</ion-col>
+        <ion-col>Temperature</ion-col>
+        <ion-col>Latitude</ion-col>
+        <ion-col>Longitude</ion-col>
+        <ion-col>Measurement Date Time</ion-col>
+      </ion-row>
+      <ion-row *ngFor="let m of measurements">
+        <ion-col>{{m.sensorId}}</ion-col>
+        <ion-col>{{m.temperature}}</ion-col>
+        <ion-col>{{m.latitude}}</ion-col>
+        <ion-col>{{m.longitude}}</ion-col>
+        <ion-col>{{m.measurementDateTime}}</ion-col>
+      </ion-row>
+
+    </ion-grid>
+
   </div>
 </ion-content>
