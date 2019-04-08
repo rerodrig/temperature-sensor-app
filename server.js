@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const app = express();
 
@@ -14,4 +15,8 @@ const forceSSL = function() {
 
 app.use(forceSSL());
 app.use(express.static('www'));
-app.set('port', process.env.PORT || 5000);
+app.set('port', process.env.PORT || 8080);
+
+app.get('/*', function(req, res) {
+  res.sendFile(path.join('www/index.html'));
+});
