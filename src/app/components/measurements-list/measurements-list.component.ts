@@ -11,8 +11,7 @@ export class MeasurementsListComponent implements OnInit {
 
   measurements: TemperatureMeasurement[] = [];
   pageNumber: number = 1;
-  pageSize: number = 1;
-  total: number = 100;
+  pageSize: number = 10;
   noMoreData: boolean;
 
   constructor(private measurementService: MeasurementsService) { }
@@ -21,9 +20,7 @@ export class MeasurementsListComponent implements OnInit {
 
   findAll(pageNumber: number){
     this.measurementService.findAll(this.pageNumber, this.pageSize).subscribe(measurements => {
-      if(this.pageNumber > 1 && measurements.length == 0){
-        this.noMoreData = true;
-      }
+      this.handleButtonStateLoadMoreData(measurements.length);
       this.measurements = this.measurements.concat(measurements);
     });
   }
@@ -37,6 +34,16 @@ export class MeasurementsListComponent implements OnInit {
   loadMore(){
     this.pageNumber = this.pageNumber + 1;
     this.findAll(this.pageNumber);
+  }
+
+  handleButtonStateLoadMoreData(measurementsLength){
+    if(this.pageNumber > 1 && measurementsLength == 0){
+      this.noMoreData = true;
+    }else  if(measurementsLength < this.pageSize){
+      this.noMoreData = true;
+    }else{
+      this.noMoreData = false;
+    }
   }
 
 }
